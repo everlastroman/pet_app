@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/bootstrap";
+@import "contact";
+
+
+footer {
+  position: fixed;
+  margin-top: 20px;
+  height: 60px;
+  bottom: 0;
+  width: 100%;
+}
