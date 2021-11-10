@@ -1,0 +1,53 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title PetApp
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    = render 'shared/error_messages'
+    = render 'shared/flash_messages'
+    .bg-dark.bg-gradient style=("--bs-bg-opacity: .2;") 
+      nav.navbar.navbar-expand-sm.navbar-light
+        .container-fluid
+          a.navbar-brand href="#"  WorldBall
+          button.navbar-toggler data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button" 
+            span.navbar-toggler-icon
+          #navbarCollapse.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li.nav-item
+                .nav-link
+                  = link_to "Home", root_url, class: "text-decoration-none text-reset"
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle data-bs-toggle="dropdown" href="#"  News
+                .dropdown-menu
+                  a.dropdown-item href="#"  General
+                  .dropdown-divider
+                  a.dropdown-item href="#"  World 
+                  a.dropdown-item href="#"  Ukraine
+                  a.dropdown-item href="#"  Ivano-Frankivsk
+              li.nav-item
+                .nav-link 
+                  = link_to "Contact", contact_url, class: "text-decoration-none text-reset"
+            ul.nav.navbar-nav.ms-auto
+              li.nav-item.dropdown
+              - if admin_signed_in?
+                .nav-link.dropdown-toggle data-bs-toggle="dropdown" href="#" 
+                  = current_admin.full_name + "goas"
+                .dropdown-menu.dropdown-menu-end
+                  a.dropdown-item href="#"  Profile
+                  a.dropdown-item href="#"  Reports
+                  a.dropdown-item href="#"  Settings
+                  .dropdown-divider
+                  .dropdown-item
+                    = link_to "Logout", destroy_admin_session_url, method: :delete, class: "text-decoration-none text-reset"
+              - else 
+                = link_to "Log in", new_admin_session_url, class: "text-decoration-none text-reset"
+    .row.p-0.m-0
+      .col.p-0.m-0
+        = yield
+    = render "shared/footer"
